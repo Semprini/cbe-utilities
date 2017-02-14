@@ -52,6 +52,11 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
+migrations/
+db.sqlite3
+
+#Sparx EA
+*.ldb
 
 # Flask stuff:
 instance/
@@ -87,3 +92,19 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# IDE
+*.sublime-project
+*.sublime-workspace
+
+# Visual Studio
+*.pyproj
+*.pyproj.user
+*.sln
+obj/
+.vs/
+bin/
+UpgradeLog.htm
+web.config
+web.debug.config
+web.config

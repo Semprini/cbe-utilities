@@ -24,11 +24,15 @@ from django.contrib.contenttypes.models import ContentType
 
 from cbe.urls import cberouter
 
+import telco.product.views as ProductViews
+
 admin.site.site_title = 'CBE Telco'
 admin.site.site_header = 'Telco Business Entities'
 
 telcorouter = DefaultRouter()
-#retailrouter.register(r'product/product_offering', ProductViews.ProductOfferingViewSet)
+telcorouter.register(r'product/product_offering', ProductViews.ProductOfferingViewSet)
+telcorouter.register(r'product/product_category', ProductViews.ProductCategoryViewSet)
+telcorouter.register(r'product/promotion', ProductViews.PromotionViewSet)
 
 
 router = DefaultRouter()

@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from telco.usage.models import UsageSpecCharacteristic, VoiceCallUsage
+
+admin.site.register(VoiceCallUsage)
+admin.site.register(UsageSpecCharacteristic)

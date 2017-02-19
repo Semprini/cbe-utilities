@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'cbe.physical_object',
     'cbe.supplier_partner',
     'telco.product',
+    'telco.usage',
 )
 
 MIDDLEWARE_CLASSES = (

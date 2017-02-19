@@ -4,6 +4,14 @@ from cbe.customer.models import Customer
 from cbe.supplier_partner.models import Supplier, Buyer
 
 
+class Product(models.Model):
+    valid_from = models.DateField(null=True, blank=True)
+    valid_to = models.DateField(null=True, blank=True)
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    status = models.CharField(max_length=100)
+
+
 class ProductCategory(models.Model):
     parent = models.ForeignKey('ProductCategory', null=True,blank=True)
 
@@ -50,3 +58,16 @@ class Promotion(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ProductPrice(models.Model):
+    product = models.ForeignKey('Product')
+    valid_from = models.DateField(null=True, blank=True)
+    valid_to = models.DateField(null=True, blank=True)
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+
+    #Shortcut to ComponentProdPrice
+    price_type = models.CharField(max_length=200)
+    unit_of_measure = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=12, decimal_places=2)

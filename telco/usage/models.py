@@ -10,18 +10,16 @@ from telco.product.models import ProductPrice
 class Usage(models.Model):
     usage_date = models.DateTimeField()
     usage_status = models.CharField(max_length=100)
-    party_roles = GM2MField()
+    party_roles = GM2MField(related_name="usage_party_roles")
+    usage_specification = GM2MField(related_name="usage_usage_specification")
     product_prices = models.ManyToManyField(ProductPrice, blank=True)
-
+    #TODO: place
+    
     class Meta:
         abstract = True
 
 
 class UsageSpecification(models.Model):
-    usage_content_type = models.ForeignKey(
-        ContentType, related_name="%(app_label)s_%(class)s_ownership")
-    usage_object_id = models.PositiveIntegerField()    
-    usage = GenericForeignKey('usage_content_type', 'usage_object_id')
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=200, blank=True, null=True)
     lifecycle_status = models.CharField(max_length=200, blank=True, null=True)
@@ -59,3 +57,16 @@ class VoiceCallUsage(Usage):
 
     call_duration = models.DurationField()
     call_type = models.CharField(max_length=100)
+
+    
+class UsageCharacteristicValue(models.Model):
+    value = models.CharField(max_length=200, blank=True, null=True)
+    value_from = models.CharField(max_length=200, blank=True, null=True)
+    value_to = models.CharField(max_length=200, blank=True, null=True)
+
+    usage_content_type = models.ForeignKey(
+        ContentType, related_name="%(app_label)s_%(class)s_ownership")
+    usage_object_id = models.PositiveIntegerField()    
+    usage = GenericForeignKey('usage_content_type', 'usage_object_id')
+
+    usage_spec_characteristic = models.ForeignKey(UsageSpecCharacteristic)

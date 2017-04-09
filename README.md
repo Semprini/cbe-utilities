@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/circleci/project/github/Semprini/cbe-telco.svg)](https://circleci.com/gh/Semprini/cbe-telco)
+[![Build Status](https://img.shields.io/circleci/project/github/Semprini/cbe-utilities.svg)](https://circleci.com/gh/Semprini/cbe-utilities)
 
-# cbe-telco
-Extensions to the Common Business Entities for Telcos
+# cbe-utilities
+Extensions to the Common Business Entities for Utilities - Telcos, Energy Companies, Media Delivery

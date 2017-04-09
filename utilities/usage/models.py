@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from gm2m import GM2MField
 
-from telco.product.models import ProductPrice
+from utilities.product.models import ProductPrice
 
 class Usage(models.Model):
     usage_date = models.DateTimeField()

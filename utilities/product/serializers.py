@@ -6,7 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 
 from cbe.utils.serializer_fields import TypeField
-from telco.product.models import ProductOffering, ProductCategory, Promotion
+from utilities.product.models import ProductOffering, ProductCategory, Promotion
 
 
 class ProductOfferingSerializer(serializers.HyperlinkedModelSerializer):

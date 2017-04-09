@@ -2,8 +2,8 @@ from rest_framework import permissions, renderers, viewsets
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
-from telco.product.models import ProductOffering, ProductCategory, Promotion
-from telco.product.serializers import ProductOfferingSerializer, ProductCategorySerializer, PromotionSerializer
+from utilities.product.models import ProductOffering, ProductCategory, Promotion
+from utilities.product.serializers import ProductOfferingSerializer, ProductCategorySerializer, PromotionSerializer
 
 
 class ProductOfferingViewSet(viewsets.ModelViewSet):

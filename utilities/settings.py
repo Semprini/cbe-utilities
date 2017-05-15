@@ -131,6 +131,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/usr/local/apache2/htdocs/'
 
 try:
-    from retail.local_settings import *
+    from utilities.local_settings import *
 except ImportError:
     pass

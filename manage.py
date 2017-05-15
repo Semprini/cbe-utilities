@@ -3,7 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "retail.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "utilities.settings")
 
     if len(sys.argv) == 5 and sys.argv[1] == "createsuperuser":
         # when used as python manage.py createsuperuser <username> <email> <password>

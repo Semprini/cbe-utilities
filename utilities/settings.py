@@ -15,6 +15,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -25,8 +26,7 @@ SECRET_KEY = 'cxwdy$w^_nyu#b3*_gfdty5m+s)m29e&bg%v*&f)9mp_fs27wy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*',]
 
 # Application definition
 
@@ -129,3 +129,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/usr/local/apache2/htdocs/'
+
+try:
+    from retail.local_settings import *
+except ImportError:
+    pass

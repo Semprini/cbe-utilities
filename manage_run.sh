@@ -1,7 +1,7 @@
 #!/bin/sh
 # Create local_settings.py from environment variables
 echo -e "import os\n\
-from retail.settings import BASE_DIR\n\n\
+from utilities.settings import BASE_DIR\n\n\
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n\
 DATABASES = {\n\
     'default': {\n\
@@ -23,7 +23,7 @@ MQ_FRAMEWORK = {\n\
         'SERVER_PORT': ${MQRESTPORT},\n\
         'SERVER_PROTOCOL': ${MQRESTPROTOCOL},\n\
     }\n\
-}\n" > /code/retail/local_settings.py
+}\n" > /code/utilities/local_settings.py
 
 sleep 10
 python manage.py migrate

@@ -1,28 +1,63 @@
-version: '2'
+version: "3.2"
 services:
-  postgresql:
-    image: sameersbn/postgresql:9.6-2
-    environment:
-      DB_EXTENSION: pg_trgm
-      DB_NAME: cbeutil
-      DB_PASS: dj4ng0
-      DB_USER: django
-    volumes:
-      - /srv/docker/cbe-utilities/postgresql:/var/lib/postgresql:Z
-  cbe-utilities:
-    image: semprini/cbe-utilities
-    environment:
-      DBENGINE: postgresql
-      DBHOST: postgresql
-      DBNAME: cbeutil
-      DBPASSWORD: dj4ng0
-      DBUSER: django
-      SUEMAIL: admin@admin.com
-      SUNAME: admin
-      SUPASS: admin
-    volumes:
-      - /srv/docker/cbe-utilities/apache2/htdocs/:/usr/local/apache2/htdocs/:Z
-    depends_on:
-      - "postgresql"
-    labels:
-      io.rancher.container.pull_image: always
+    haproxy:
+        image: dockercloud/haproxy:latest
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+        environment:
+            MODE: tcp
+        expose:
+            - 5671
+            - 5672
+        links:
+            - cbemq
+        ports:
+            - '5671:5671'
+            - '5672:5672'
+            
+    cbeapp:
+        image: semprini/cbe-utilities
+        environment:
+            DBENGINE: postgresql
+            DBHOST: cbedb
+            DBNAME: cbe
+            DBPASSWORD: super
+            DBUSER: super
+            MQHOST: cbemq
+            MQUSER: super
+            MQPASSWORD: super
+            MQRESTSERVER: 'cbe.sphinx.co.nz'
+            MQRESTPORT: 443
+            MQRESTPROTOCOL: 'https'
+            SUNAME: super
+            SUEMAIL: super@super.com
+            SUPASS: super
+        depends_on:
+            - cbedb
+            - cbemq
+        ports:
+            - "8000:8000"
+            
+    cbedb:
+        image: postgres:latest
+        volumes:
+            - "db-data:/var/lib/postgresql/data"
+        environment:
+            POSTGRES_PASSWORD: super
+            POSTGRES_USER: super
+            POSTGRES_DB: cbe
+            
+    cbemq:
+        image: rabbitmq:3-management-alpine
+        environment:
+            RABBITMQ_DEFAULT_USER: super
+            RABBITMQ_DEFAULT_PASS: super
+            TCP_PORTS: "5672,5671"
+        ports:
+            - "8080:15672"
+            - "5671"
+            - "5672"
+
+volumes:
+    db-data:
+

@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 # Create local_settings.py from environment variables
 echo -e "import os\n\
-from utilities.settings import BASE_DIR\n\n\
+from retail.settings import BASE_DIR\n\n\
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n\
 DATABASES = {\n\
     'default': {\n\
@@ -12,11 +12,20 @@ DATABASES = {\n\
         'USER': '${DBUSER}',\n\
         'PASSWORD': '${DBPASSWORD}',\n\
     }\n\
-}\n" > /code/utilities/local_settings.py
+}\n\
+MQ_FRAMEWORK = {\n\
+    'HOST': '${MQHOST}',\n\
+    'USER': '${MQUSER}',\n\
+    'PASSWORD': '${MQPASSWORD}',\n\
+    'EXCHANGE_PREFIX': 'notify.',\n\
+    'HTTP_REST_CONTEXT': {\n\
+        'SERVER_NAME': '${MQRESTSERVER}',\n\
+        'SERVER_PORT': ${MQRESTPORT},\n\
+        'SERVER_PROTOCOL': ${MQRESTPROTOCOL},\n\
+    }\n\
+}\n" > /code/retail/local_settings.py
 
-#python manage.py migrate auth contenttypes
-#python manage.py makemigrations business_interaction location physical_object resource customer trouble supplier_partner human_resources product pricing sale
+sleep 10
 python manage.py migrate
 python manage.py getorcreatesuperuser ${SUNAME} ${SUEMAIL} ${SUPASS}
-#uwsgi --ini uwsgi.ini
 python manage.py runserver 0.0.0.0:8000

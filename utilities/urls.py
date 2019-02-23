@@ -22,7 +22,8 @@ from rest_framework import serializers, viewsets
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
-from cbe.urls import cberouter
+#from cbe.urls import cberouter
+#from . import views
 
 import utilities.product.views as ProductViews
 
@@ -38,12 +39,12 @@ utilsrouter.register(r'product/promotion', ProductViews.PromotionViewSet)
 router = DefaultRouter()
 for route in utilsrouter.registry:
     router.register(route[0], route[1])
-for route in cberouter.registry:
-    router.register(route[0], route[1])
+#for route in cberouter.registry:
+#    router.register(route[0], route[1])
     
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    #url(r'^$', views.index, name='index'),
+    url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
-    url(r'^api-auth/',
-        include('rest_framework.urls', namespace='rest_framework')),
-    ]
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+]

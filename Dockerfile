@@ -15,7 +15,7 @@ ENV SUPASS super
 
 # Install some necessary things.
 RUN apt-get update
-RUN apt-get install -y swig libssl-dev dpkg-dev netcat libmysqlclient-dev
+RUN apt-get install -y swig libssl-dev dpkg-dev netcat
 
 # Copy all our files into the image.
 RUN git clone https://github.com/Semprini/cbe-utilities.git /code
@@ -24,7 +24,7 @@ WORKDIR /code
 # Install our requirements.
 RUN pip install -U pip
 RUN pip install -Ur requirements.txt
-RUN pip install uwsgi mysqlclient psycopg2
+RUN pip install uwsgi psycopg2
 
 # Collect our static media
 RUN python manage.py collectstatic --noinput

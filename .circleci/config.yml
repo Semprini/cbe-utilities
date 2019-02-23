@@ -13,6 +13,7 @@ jobs:
       - run:
           name: install python dependencies
           command: |
+            pip install --upgrade pip
             pip install -r requirements.txt
       - run:
           name: run unit tests

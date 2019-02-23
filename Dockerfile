@@ -32,4 +32,4 @@ RUN python manage.py collectstatic --noinput
 # Specify the command to run when the image is run.
 RUN ["chmod", "+x", "/code/manage_run.sh"]
 RUN ["chmod", "+x", "/code/manage.py"]
-CMD ["/code/manage_run.sh"]
+CMD ["bash -c /code/manage_run.sh"]

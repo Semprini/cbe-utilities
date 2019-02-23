@@ -32,7 +32,7 @@ class UsageSpecification(models.Model):
 
 class UsageSpecCharacteristic(models.Model):
     usage_specification_content_type = models.ForeignKey(
-        ContentType, related_name="%(app_label)s_%(class)s_ownership")
+        ContentType, on_delete=models.CASCADE, related_name="%(app_label)s_%(class)s_ownership")
     usage_specification_object_id = models.PositiveIntegerField()    
     usage_specification = GenericForeignKey('usage_specification_content_type', 'usage_specification_object_id')
 
@@ -65,8 +65,8 @@ class UsageCharacteristicValue(models.Model):
     value_to = models.CharField(max_length=200, blank=True, null=True)
 
     usage_content_type = models.ForeignKey(
-        ContentType, related_name="%(app_label)s_%(class)s_ownership")
+        ContentType, on_delete=models.CASCADE, related_name="%(app_label)s_%(class)s_ownership")
     usage_object_id = models.PositiveIntegerField()    
     usage = GenericForeignKey('usage_content_type', 'usage_object_id')
 
-    usage_spec_characteristic = models.ForeignKey(UsageSpecCharacteristic)
+    usage_spec_characteristic = models.ForeignKey(UsageSpecCharacteristic, on_delete=models.CASCADE)

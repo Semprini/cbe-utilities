@@ -4,7 +4,10 @@ djangorestframework-csv
 django-filter>=0.15.3
 django-nose
 django-gm2m
+django-extensions
+django-rest-swagger
 markdown>=2.6.7
 coverage
 pika
+git+https://github.com/Semprini/drf-nest.git
 git+https://github.com/Semprini/cbe.git

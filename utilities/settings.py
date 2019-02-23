@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'gm2m',
     'cbe.business_interaction',
     'cbe.customer',
+    'cbe.credit',
     'cbe.location',
     'cbe.party',
     'cbe.trouble',
@@ -109,6 +110,17 @@ REST_FRAMEWORK = {
     ),
 }
 
+MQ_FRAMEWORK = {
+    'HOST': 'None',
+    'USER': 'None',
+    'PASSWORD': 'None',
+    'EXCHANGE_PREFIX': 'notify.',
+    'HTTP_REST_CONTEXT': {
+        'SERVER_NAME': '127.0.0.1',
+        'SERVER_PORT': 8000,
+        'SERVER_PROTOCOL': 'http',
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -128,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/usr/local/apache2/htdocs/'
+STATIC_ROOT = '../static/utilities/'
 
 try:
     from utilities.local_settings import *

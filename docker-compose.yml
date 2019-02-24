@@ -18,20 +18,20 @@ services:
     cbeapp:
         image: semprini/cbe-utilities
         environment:
-            DBENGINE: postgresql
-            DBHOST: cbedb
-            DBNAME: cbe
-            DBPASSWORD: super
-            DBUSER: super
-            MQHOST: cbemq
-            MQUSER: super
-            MQPASSWORD: super
-            MQRESTSERVER: cbe.sphinx.co.nz
-            MQRESTPORT: 443
-            MQRESTPROTOCOL: https
-            SUNAME: super
-            SUEMAIL: super@super.com
-            SUPASS: super
+            - DBENGINE=postgresql
+            - DBHOST=cbedb
+            - DBNAME=cbe
+            - DBPASSWORD=super
+            - DBUSER=super
+            - MQHOST=cbemq
+            - MQUSER=super
+            - MQPASSWORD=super
+            - MQRESTSERVER=cbe.sphinx.co.nz
+            - MQRESTPORT=443
+            - MQRESTPROTOCOL=https
+            - SUNAME=super
+            - SUEMAIL=super@super.com
+            - SUPASS=super
         depends_on:
             - cbedb
             - cbemq

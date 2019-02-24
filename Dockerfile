@@ -31,7 +31,6 @@ RUN python manage.py collectstatic --noinput
 
 RUN ["chmod", "+x", "/code/manage_run.sh"]
 RUN ["chmod", "+x", "/code/create_local_settings.sh"]
-RUN ["bash", "-c", "/code/create_local_settings.sh"]
 
 # Specify the command to run when the image is run.
 CMD ["/code/manage_run.sh"]

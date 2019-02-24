@@ -29,7 +29,9 @@ RUN pip install uwsgi psycopg2
 # Collect our static media
 RUN python manage.py collectstatic --noinput
 
-# Specify the command to run when the image is run.
 RUN ["chmod", "+x", "/code/manage_run.sh"]
-RUN ["chmod", "+x", "/code/manage.py"]
-CMD ["bash -c /code/manage_run.sh"]
+RUN ["chmod", "+x", "/code/create_local_settings.sh"]
+RUN ["bash", "-c", "/code/create_local_settings.sh"]
+
+# Specify the command to run when the image is run.
+CMD ["/code/manage_run.sh"]

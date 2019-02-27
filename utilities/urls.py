@@ -24,6 +24,9 @@ from . import views
 
 from cbe.party.urls import urlpatterns as PartyUrls
 from cbe.location.urls import urlpatterns as LocationUrls
+from cbe.human_resources.urls import urlpatterns as HRUrls
+from cbe.customer.urls import urlpatterns as CustomerUrls
+
 from utilities.product.urls import urlpatterns as ProductUrls
 
 admin.site.site_title = 'CBE Utilities'
@@ -31,6 +34,8 @@ admin.site.site_header = 'Utilities Business Entities'
 
 apps={  'party':'app-party',
         'location':'app-location',
+        'human_resources':'app-human_resources',
+        'customer':'app-customer',
         'product':'app-product',
 }
 router = AppRouter( apps=apps )
@@ -40,4 +45,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-] + ProductUrls + PartyUrls + LocationUrls
+] + ProductUrls + PartyUrls + LocationUrls + HRUrls + CustomerUrls

@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*',]
 
+DEPTH_MAX = 2
+
 # Application definition
 
 INSTALLED_APPS = (

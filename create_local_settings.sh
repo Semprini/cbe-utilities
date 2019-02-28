@@ -15,6 +15,8 @@ DATABASES = {\n\
         'PASSWORD': '${DBPASSWORD}',\n\
     }\n\
 }\n\
+LANGUAGE_CODE = 'en-nz'\n\
+TIME_ZONE = 'Pacific/Auckland'\n\
 MQ_FRAMEWORK = {\n\
     'HOST': '${MQHOST}',\n\
     'USER': '${MQUSER}',\n\

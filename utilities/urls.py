@@ -16,35 +16,33 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from rest_framework.routers import DefaultRouter
-from rest_framework import serializers, viewsets
-
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
-#from cbe.urls import cberouter
-#from . import views
+from drf_nest.routers import AppRouter
+from . import views
 
-import utilities.product.views as ProductViews
+from cbe.party.urls import urlpatterns as PartyUrls
+from cbe.location.urls import urlpatterns as LocationUrls
+from cbe.human_resources.urls import urlpatterns as HRUrls
+from cbe.customer.urls import urlpatterns as CustomerUrls
+
+from utilities.product.urls import urlpatterns as ProductUrls
 
 admin.site.site_title = 'CBE Utilities'
 admin.site.site_header = 'Utilities Business Entities'
 
-utilsrouter = DefaultRouter()
-utilsrouter.register(r'product/product_offering', ProductViews.ProductOfferingViewSet)
-utilsrouter.register(r'product/product_category', ProductViews.ProductCategoryViewSet)
-utilsrouter.register(r'product/promotion', ProductViews.PromotionViewSet)
+apps={  'party':'app-party',
+        'location':'app-location',
+        'human_resources':'app-human_resources',
+        'customer':'app-customer',
+        'product':'app-product',
+}
+router = AppRouter( apps=apps )
 
-
-router = DefaultRouter()
-for route in utilsrouter.registry:
-    router.register(route[0], route[1])
-#for route in cberouter.registry:
-#    router.register(route[0], route[1])
-    
 urlpatterns = [
-    #url(r'^$', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-]
+] + ProductUrls + PartyUrls + LocationUrls + HRUrls + CustomerUrls

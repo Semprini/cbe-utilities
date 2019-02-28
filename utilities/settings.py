@@ -141,6 +141,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '../static/utilities/'
+DEPTH_MAX = 2
 
 try:
     from utilities.local_settings import *

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Create local_settings.py from environment variables
-bash -c create_local_settings.sh
+bash -c /code/create_local_settings.sh
 
 sleep 10
 python manage.py migrate

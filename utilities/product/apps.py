@@ -1,5 +1,6 @@
 from django.apps import AppConfig
-
+from django.db.models.signals import post_save, post_delete
+from django.conf import settings
 
 class ProductConfig(AppConfig):
     name = 'utilities.product'

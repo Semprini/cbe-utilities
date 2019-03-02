@@ -58,6 +58,15 @@ services:
             - "5671"
             - "5672"
 
+    cbedbadmin:
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: super@super.com
+            PGADMIN_DEFAULT_PASSWORD: super
+        ports:
+            - "80:80"
+        links:
+            - cbedb
 volumes:
     db-data:
 

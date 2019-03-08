@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
+from rest_framework_swagger.views import get_swagger_view
+
 from drf_nest.routers import AppRouter
 from . import views
 
@@ -32,6 +34,8 @@ from utilities.product.urls import urlpatterns as ProductUrls
 admin.site.site_title = 'CBE Utilities'
 admin.site.site_header = 'Utilities Business Entities'
 
+schema_view = get_swagger_view(title='Pastebin API')
+
 apps={  'party':'app-party',
         'location':'app-location',
         'human_resources':'app-human_resources',
@@ -43,6 +47,7 @@ router = AppRouter( apps=apps )
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
+    url(r'^schema$', schema_view),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ] + ProductUrls + PartyUrls + LocationUrls + HRUrls + CustomerUrls

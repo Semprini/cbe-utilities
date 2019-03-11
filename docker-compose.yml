@@ -2,6 +2,7 @@ version: "3.2"
 services:
     haproxy:
         image: dockercloud/haproxy:latest
+        restart: unless-stopped
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
         environment:
@@ -9,14 +10,20 @@ services:
         expose:
             - 5671
             - 5672
+            - 8000
+            - 8080
         links:
             - cbemq
+            - cbeapp
         ports:
-            - '5671:5671'
-            - '5672:5672'
+            - "5671:5671"
+            - "5672:5672"
+            - "8000:8000"
+            - "8080:8080"
             
     cbeapp:
         image: semprini/cbe-utilities
+        restart: unless-stopped
         environment:
             - DBENGINE=postgresql
             - DBHOST=cbedb
@@ -36,10 +43,11 @@ services:
             - cbedb
             - cbemq
         ports:
-            - "8000:8000"
+            - 8000
             
     cbedb:
         image: postgres:latest
+        restart: unless-stopped
         volumes:
             - "db-data:/var/lib/postgresql/data"
         environment:
@@ -49,6 +57,7 @@ services:
             
     cbemq:
         image: rabbitmq:3-management-alpine
+        restart: unless-stopped
         environment:
             RABBITMQ_DEFAULT_USER: super
             RABBITMQ_DEFAULT_PASS: super
@@ -60,6 +69,7 @@ services:
 
     cbedbadmin:
         image: dpage/pgadmin4
+        restart: unless-stopped
         environment:
             PGADMIN_DEFAULT_EMAIL: super@super.com
             PGADMIN_DEFAULT_PASSWORD: super

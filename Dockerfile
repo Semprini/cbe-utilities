@@ -15,7 +15,7 @@ ENV SUPASS super
 
 # Install some necessary things.
 RUN apt-get update
-RUN apt-get install -y swig libssl-dev dpkg-dev netcat
+RUN apt-get install -y swig libssl-dev dpkg-dev netcat uwsgi uwsgi-plugin-python3
 
 # Copy all our files into the image.
 RUN git clone https://github.com/Semprini/cbe-utilities.git /code

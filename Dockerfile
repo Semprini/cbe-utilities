@@ -24,7 +24,7 @@ WORKDIR /code
 # Install our requirements.
 RUN pip install -U pip
 RUN pip install -Ur requirements.txt
-RUN pip install uwsgi psycopg2
+RUN pip install uwsgi psycopg2-binary
 
 # Collect our static media
 RUN python manage.py collectstatic --noinput

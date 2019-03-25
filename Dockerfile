@@ -15,6 +15,7 @@ ENV SUPASS super
 
 # Install some necessary things.
 RUN apt-get update
+RUN apt-get install -y virtualenv
 RUN apt-get install -y swig libssl-dev dpkg-dev netcat uwsgi uwsgi-plugin-python3
 
 # Copy all our files into the image.
@@ -22,6 +23,8 @@ RUN git clone https://github.com/Semprini/cbe-utilities.git /code
 WORKDIR /code
 
 # Install our requirements.
+RUN virtualenv --python=python3 ../venv
+RUN . ../venv/bin/activate
 RUN pip install -U pip
 RUN pip install -Ur requirements.txt
 RUN pip install uwsgi psycopg2-binary

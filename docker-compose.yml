@@ -11,16 +11,11 @@ services:
             - 5671
             - 5672
             - 8000
-            - 8080
+            - 9000
         links:
             - cbemq
             - cbeapp
-        ports:
-            - "5671:5671"
-            - "5672:5672"
-            - "8000:8000"
-            - "8080:8080"
-            
+            - cbedbadmin
     cbeapp:
         image: semprini/cbe-utilities
         restart: unless-stopped
@@ -43,7 +38,7 @@ services:
             - cbedb
             - cbemq
         ports:
-            - 8000
+                - "8000:8000"
             
     cbedb:
         image: postgres:latest
@@ -63,9 +58,9 @@ services:
             RABBITMQ_DEFAULT_PASS: super
             TCP_PORTS: "5672,5671"
         ports:
-            - "8080:15672"
-            - "5671"
-            - "5672"
+            - '8080:15672'
+            - 5671
+            - 5672
 
     cbedbadmin:
         image: dpage/pgadmin4
@@ -74,7 +69,7 @@ services:
             PGADMIN_DEFAULT_EMAIL: super@super.com
             PGADMIN_DEFAULT_PASSWORD: super
         ports:
-            - "80:80"
+            - 80
         links:
             - cbedb
 volumes:
